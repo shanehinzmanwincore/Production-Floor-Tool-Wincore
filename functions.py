@@ -501,10 +501,11 @@ def PCRef(self, options):
         btnColor(self, options[i])
         i += 1
 
-'''
+"""
 This function currently runs as the user that runs this program. I need it to be ran as another user with my privileges
 Ill be back for you...|
                       V
+"""
 def startProc(pcName, proc):
     if (proc == "TigerStop"):
         p = subprocess.Popen("""WMIC /node:""" + '"' + pcName + '"' +  """ process call create 'cmd.exe /c "C:\Program Files (x86)\FeneVision\TigerStop HMI\FtTigerStop.exe"'""", stdout=subprocess.PIPE, shell=True)
@@ -517,4 +518,3 @@ def startProc(pcName, proc):
             return 0
         else:
             return 1
-'''
