@@ -4,7 +4,7 @@ It is currently made to used with all of the window plant VM's.
 More features can be added.
 This file contains all of the GUI elements of the program.
 The functions.py file contains all of the functions. 
-The logger.py file includes the logger for the whole application.
+The logger.py file includes the logger for the whole application. 
 """
 from Tkinter import *
 from PIL import Image, ImageTk
