@@ -11,48 +11,48 @@ import hashlib
 import time
 
 #Brings in logger
-logger = logger.setup_logger('root') 
+logger = logger.setup_logger('root')
 
 #List of all PC's
 options = [
-        'PKB-SAW1',
-        'PKB-SAW2',
-        'PKB-SAW3',
-        'PKB-SAW4',
-        'PKB-SAW5',
-        'PKB-SAW6',
-        'PKB-SAW7',
-        'PKB-SAW8',
-        'PKB-SAW9',
-        'PKB-SAW10',
-        'PKB-SAW11',
-        'PKB-SAW12',
-        'PKB-SAW-13',
-        'PKB-77-INSP-VM',
-        'PKB-MLINE-INSP-VM',
-        'PKB-54-INSP-VM',
-        'PKB-54-AUTO-INSP',
-        'PKB-PAINT-INSP',
-        'VM-GL-TB-NEW',
-        'VM-GL-TB-OLD',
-        'PKB-LOADING-1',
-        'PKB-LOADING-2',
-        'PKB-LOADING-3',
-        'PKB-LOADING-4',
-        'PKB-LOADING-5',
-        'PKB-LOADING6',
-        'PKB-LOADING7'
-        ]
+    'PKB-SAW1',
+    'PKB-SAW2',
+    'PKB-SAW3',
+    'PKB-SAW4',
+    'PKB-SAW5',
+    'PKB-SAW6',
+    'PKB-SAW7',
+    'PKB-SAW8',
+    'PKB-SAW9',
+    'PKB-SAW10',
+    'PKB-SAW11',
+    'PKB-SAW12',
+    'PKB-SAW-13',
+    'PKB-77-INSP-VM',
+    'PKB-MLINE-INSP-VM',
+    'PKB-54-INSP-VM',
+    'PKB-54-AUTO-INSP',
+    'PKB-PAINT-INSP',
+    'VM-GL-TB-NEW',
+    'VM-GL-TB-OLD',
+    'PKB-LOADING-1',
+    'PKB-LOADING-2',
+    'PKB-LOADING-3',
+    'PKB-LOADING-4',
+    'PKB-LOADING-5',
+    'PKB-LOADING6',
+    'PKB-LOADING7'
+    ]
 
 #Clear text in entry field
 def clearButtonClick(self):
     logger.info('Cleared field')
-    self.pcEntry.delete(0,  'end')
+    self.pcEntry.delete(0, 'end')
 
 #Restart specified PC
 def restButtonClick(self):
     logger.info('User trying to reboot PC')
-    
+
     #Set function variables
     logger.info('Checking to see if host is alive...')
     checkMessage = "Checking to see if host is alive..."
@@ -61,7 +61,7 @@ def restButtonClick(self):
     alive = isAlive(pcName)
 
     #Test to see if there is something in the entry field. This prevents shutting down your PC
-    if(pcName == "" or alive == "0"):
+    if((pcName == "") or (alive == "0")):
 
         #If the user does not type the PC in, this checks to see if the dropdown has anything of value.
         pcName = str(self.pcDrop.get())
