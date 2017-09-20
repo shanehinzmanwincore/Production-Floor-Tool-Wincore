@@ -411,7 +411,7 @@ def initUI(self):
     fileMenu.add_command(label="Add User", command = lambda: addUserButtonClick(self))
     menubar.add_cascade(label="File", menu=fileMenu)
 
-    toolsMenu.add_command(label="Refresh View", command = lambda: PCRef(self, options))
+    #toolsMenu.add_command(label="Refresh View", command = lambda: PCRef(self, options))
     toolsMenu.add_command(label="Remove Batch", command = lambda: removeBatch(self, options))
     menubar.add_cascade(label="Tools", menu=toolsMenu)
 
@@ -493,12 +493,15 @@ def removeBatch(self, options):
         i += 1
     outputMessage(self, 'Removed all desktop batch file icons')
     logger.info('Removed all desktop batch file icons')
-
+"""
 #Looks through all of the computers to see what button color the PC will have. Blue for alive red for dead
+Needs Work |
+           V
+"""
 def PCRef(self, options):
     i=0
     while i < len(options):
-        btnColor(self, options[i])
+        self.configure(bg = btnColor(self, options[i]))
         i += 1
 
 """
