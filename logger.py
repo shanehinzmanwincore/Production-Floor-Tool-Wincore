@@ -1,5 +1,5 @@
 """
-Logger is the global logging function for ProdFloorTool.py 
+Logger is the global logging function for ProdFloorTool.py
 """
 import logging
 import socket

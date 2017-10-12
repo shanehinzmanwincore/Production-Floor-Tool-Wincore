@@ -1,7 +1,7 @@
 """
 ProdFloorTool.py is designed to be used by the Wincore IT department. 
 It is currently made to used with all of the window plant VM's.
-More features can be added.
+More features will be added
 This file contains all of the GUI elements of the program.
 The functions.py file contains all of the functions. 
 The logger.py file includes the logger for the whole application. 
@@ -14,6 +14,7 @@ from threading import Thread
 import time
 import Tkinter as tk
 
+#Main GUI
 class GUI(Frame):
 
     def __init__(self,master=None):
@@ -57,32 +58,32 @@ class GUI(Frame):
         self.drop.configure(highlightbackground = 'lightgrey', cursor = "hand2")
 
         #Clear button
-        self.clearTextButton = Button(master, text="Clear", command = lambda: functions.clearButtonClick(self))
+        self.clearTextButton = Button(master, text="Clear", command = lambda: functions.clearButtonClickThread(self))
         self.clearTextButton.grid(column = 3, row = 0, padx = 5, pady = 5, sticky = W+E)
         self.clearTextButton.configure(cursor = "hand2")
 
         #Restart button
-        self.restSubmitButton = Button(master, text="Restart PC", command = lambda: functions.restButtonClick(self))
+        self.restSubmitButton = Button(master, text="Restart PC", command = lambda: functions.restButtonClickThread(self))
         self.restSubmitButton.grid(column = 0, row = 6, padx = 5, pady = 5, sticky = W+E)
         self.restSubmitButton.configure(background = 'red', cursor = "hand2")
 
         #Kill tiger process button
-        self.tigerKillSubmitButton = Button(master, text="Kill TigerStop", command = lambda: functions.tigerKillButtonClick(self))
+        self.tigerKillSubmitButton = Button(master, text="Kill TigerStop", command = lambda: functions.tigerKillButtonClickThread(self))
         self.tigerKillSubmitButton.grid(column = 0, row = 2, padx = 5, pady = 5, sticky = W+E)
         self.tigerKillSubmitButton.configure(background = 'yellow', cursor = "hand2")
 
         #Kill tracking process button
-        self.trackingKillSubmitButton = Button(master, text="Kill Tracking", command = lambda: functions.trackingKillButtonClick(self))
+        self.trackingKillSubmitButton = Button(master, text="Kill Tracking", command = lambda: functions.trackingKillButtonClickThread(self))
         self.trackingKillSubmitButton.grid(column = 0, row = 3, padx = 5, pady = 5, sticky = W+E)
         self.trackingKillSubmitButton.configure(background = 'yellow', cursor = "hand2")
 
         #Kill trucking process button
-        self.truckingKillSubmitButton = Button(master, text="Kill Trucking", command = lambda: functions.truckingKillButtonClick(self))
+        self.truckingKillSubmitButton = Button(master, text="Kill Trucking", command = lambda: functions.truckingKillButtonClickThread(self))
         self.truckingKillSubmitButton.grid(column = 0, row = 4, padx = 5, pady = 5, sticky = W+E)
         self.truckingKillSubmitButton.configure(background = 'yellow', cursor = "hand2")
 
         #Kill glass inspection process button
-        self.glassInspKillSubmitButton = Button(master, text="Kill Glass", command = lambda: functions.glassInspKillButtonClick(self))
+        self.glassInspKillSubmitButton = Button(master, text="Kill Glass", command = lambda: functions.glassInspKillButtonClickThread(self))
         self.glassInspKillSubmitButton.grid(column = 0, row = 5, padx = 5, pady = 5, sticky = W+E)
         self.glassInspKillSubmitButton.configure(background = 'yellow', cursor = "hand2")
 
@@ -118,7 +119,7 @@ class GUI(Frame):
         self.canBackground = self.mainCan.create_image(0,0, image = photo, anchor = "nw")
 
         #Saw1 button
-        self.saw1 = Button(master, text="1", command = lambda: functions.pcButton(self, 'PKB-SAW1'))
+        self.saw1 = Button(master, text="1", command = lambda: functions.pcButtonThread(self, 'PKB-SAW1'))
         self.saw1.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.saw1.configure(width = 1, cursor = "hand2")
         self.saw1_window = self.mainCan.create_window(450, 272, window = self.saw1)
@@ -126,7 +127,7 @@ class GUI(Frame):
         functions.thinClients.append(self.saw1)
 
         #Saw2 button
-        self.saw2 = Button(master, text="2", command = lambda: functions.pcButton(self, 'PKB-SAW2'))
+        self.saw2 = Button(master, text="2", command = lambda: functions.pcButtonThread(self, 'PKB-SAW2'))
         self.saw2.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.saw2.configure(width = 1, cursor = "hand2")
         self.saw2_window = self.mainCan.create_window(405, 272, window = self.saw2)
@@ -134,7 +135,7 @@ class GUI(Frame):
         functions.thinClients.append(self.saw2)
 
         #Saw3 button
-        self.saw3 = Button(master, text="3", command = lambda: functions.pcButton(self, 'PKB-SAW3'))
+        self.saw3 = Button(master, text="3", command = lambda: functions.pcButtonThread(self, 'PKB-SAW3'))
         self.saw3.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.saw3.configure(width = 1, cursor = "hand2")
         self.saw3_window = self.mainCan.create_window(356, 272, window = self.saw3)
@@ -142,7 +143,7 @@ class GUI(Frame):
         functions.thinClients.append(self.saw3)
 
         #Saw4 button
-        self.saw4 = Button(master, text="4", command = lambda: functions.pcButton(self, 'PKB-SAW4'))
+        self.saw4 = Button(master, text="4", command = lambda: functions.pcButtonThread(self, 'PKB-SAW4'))
         self.saw4.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.saw4.configure(width = 1, cursor = "hand2")
         self.saw4_window = self.mainCan.create_window(335, 272, window = self.saw4)
@@ -150,7 +151,7 @@ class GUI(Frame):
         functions.thinClients.append(self.saw4)
 
         #Saw5 button
-        self.saw5 = Button(master, text="5", command = lambda: functions.pcButton(self, 'PKB-SAW5'))
+        self.saw5 = Button(master, text="5", command = lambda: functions.pcButtonThread(self, 'PKB-SAW5'))
         self.saw5.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.saw5.configure(width = 1, cursor = "hand2")
         self.saw5_window = self.mainCan.create_window(295, 272, window = self.saw5)
@@ -158,7 +159,7 @@ class GUI(Frame):
         functions.thinClients.append(self.saw5)
 
         #Saw6 button
-        self.saw6 = Button(master, text="6", command = lambda: functions.pcButton(self, 'PKB-SAW6'))
+        self.saw6 = Button(master, text="6", command = lambda: functions.pcButtonThread(self, 'PKB-SAW6'))
         self.saw6.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.saw6.configure(width = 1, cursor = "hand2")
         self.saw6_window = self.mainCan.create_window(275, 272, window = self.saw6)
@@ -166,7 +167,7 @@ class GUI(Frame):
         functions.thinClients.append(self.saw6)
 
         #Saw7 button
-        self.saw7 = Button(master, text="7", command = lambda: functions.pcButton(self, 'PKB-SAW7'))
+        self.saw7 = Button(master, text="7", command = lambda: functions.pcButtonThread(self, 'PKB-SAW7'))
         self.saw7.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.saw7.configure(width = 1, cursor = "hand2")
         self.saw7_window = self.mainCan.create_window(245, 272, window = self.saw7)
@@ -174,7 +175,7 @@ class GUI(Frame):
         functions.thinClients.append(self.saw7)
 
         #Saw8 button
-        self.saw8 = Button(master, text="8", command = lambda: functions.pcButton(self, 'PKB-SAW8'))
+        self.saw8 = Button(master, text="8", command = lambda: functions.pcButtonThread(self, 'PKB-SAW8'))
         self.saw8.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.saw8.configure(width = 1, cursor = "hand2")
         self.saw8_window = self.mainCan.create_window(225, 272, window = self.saw8)
@@ -182,7 +183,7 @@ class GUI(Frame):
         functions.thinClients.append(self.saw8)
 
         #Saw9 button
-        self.saw9 = Button(master, text="9", command = lambda: functions.pcButton(self, 'PKB-SAW9'))
+        self.saw9 = Button(master, text="9", command = lambda: functions.pcButtonThread(self, 'PKB-SAW9'))
         self.saw9.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.saw9.configure(width = 1, cursor = "hand2")
         self.saw9_window = self.mainCan.create_window(879, 272, window = self.saw9)
@@ -190,7 +191,7 @@ class GUI(Frame):
         functions.thinClients.append(self.saw9)
 
         #Saw10 button
-        self.saw10 = Button(master, text="10", command = lambda: functions.pcButton(self, 'PKB-SAW10'))
+        self.saw10 = Button(master, text="10", command = lambda: functions.pcButtonThread(self, 'PKB-SAW10'))
         self.saw10.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.saw10.configure(width = 1, cursor = "hand2")
         self.saw10_window = self.mainCan.create_window(803, 272, window = self.saw10)
@@ -198,7 +199,7 @@ class GUI(Frame):
         functions.thinClients.append(self.saw10)
 
         #Saw11 button
-        self.saw11 = Button(master, text="11", command = lambda: functions.pcButton(self, 'PKB-SAW11'))
+        self.saw11 = Button(master, text="11", command = lambda: functions.pcButtonThread(self, 'PKB-SAW11'))
         self.saw11.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.saw11.configure(width = 1, cursor = "hand2")
         self.saw11_window = self.mainCan.create_window(900, 272, window = self.saw11)
@@ -206,7 +207,7 @@ class GUI(Frame):
         functions.thinClients.append(self.saw11)
         
         #Saw12 button
-        self.saw12 = Button(master, text="12", command = lambda: functions.pcButton(self, 'PKB-SAW12'))
+        self.saw12 = Button(master, text="12", command = lambda: functions.pcButtonThread(self, 'PKB-SAW12'))
         self.saw12.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.saw12.configure(width = 1, cursor = "hand2")
         self.saw12_window = self.mainCan.create_window(783, 272, window = self.saw12)
@@ -214,7 +215,7 @@ class GUI(Frame):
         functions.thinClients.append(self.saw12)
 
         #Saw13 button
-        self.saw13 = Button(master, text="13", command = lambda: functions.pcButton(self, 'PKB-SAW-13'))
+        self.saw13 = Button(master, text="13", command = lambda: functions.pcButtonThread(self, 'PKB-SAW-13'))
         self.saw13.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.saw13.configure(width = 1, cursor = "hand2")
         self.saw13_window = self.mainCan.create_window(840, 272, window = self.saw13)
@@ -222,7 +223,7 @@ class GUI(Frame):
         functions.thinClients.append(self.saw13)
 
         #77 inspection button
-        self.insp77 = Button(master, text="77", command = lambda: functions.pcButton(self, 'PKB-77-INSP-VM'))
+        self.insp77 = Button(master, text="77", command = lambda: functions.pcButtonThread(self, 'PKB-77-INSP-VM'))
         self.insp77.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.insp77.configure(width = 1, cursor = "hand2")
         self.insp77_window = self.mainCan.create_window(256, 595, window = self.insp77)
@@ -230,7 +231,7 @@ class GUI(Frame):
         functions.thinClients.append(self.insp77)
 
         #Center inspection button
-        self.inspCenter = Button(master, text="C", command = lambda: functions.pcButton(self, 'PKB-MLINE-INSP-VM'))
+        self.inspCenter = Button(master, text="C", command = lambda: functions.pcButtonThread(self, 'PKB-MLINE-INSP-VM'))
         self.inspCenter.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.inspCenter.configure(width = 1, cursor = "hand2")
         self.inspCenter_window = self.mainCan.create_window(363, 595, window = self.inspCenter)
@@ -238,7 +239,7 @@ class GUI(Frame):
         functions.thinClients.append(self.inspCenter)
 
         #54 inspection button
-        self.insp54 = Button(master, text="54", command = lambda: functions.pcButton(self, 'PKB-54-INSP-VM'))
+        self.insp54 = Button(master, text="54", command = lambda: functions.pcButtonThread(self, 'PKB-54-INSP-VM'))
         self.insp54.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.insp54.configure(width = 1, cursor = "hand2")
         self.insp54_window = self.mainCan.create_window(809, 546, window = self.insp54)
@@ -246,7 +247,7 @@ class GUI(Frame):
         functions.thinClients.append(self.insp54)
 
         #54 auto inspection button
-        self.insp54a = Button(master, text="A", command = lambda: functions.pcButton(self, 'PKB-54-AUTO-INSP'))
+        self.insp54a = Button(master, text="A", command = lambda: functions.pcButtonThread(self, 'PKB-54-AUTO-INSP'))
         self.insp54a.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.insp54a.configure(width = 1, cursor = "hand2")
         self.insp54a_window = self.mainCan.create_window(1020, 542, window = self.insp54a)
@@ -254,7 +255,7 @@ class GUI(Frame):
         functions.thinClients.append(self.insp54a)
 
         #Paint inspection button
-        self.inspPaint = Button(master, text="P", command = lambda: functions.pcButton(self, 'PKB-PAINT-INSP'))
+        self.inspPaint = Button(master, text="P", command = lambda: functions.pcButtonThread(self, 'PKB-PAINT-INSP'))
         self.inspPaint.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.inspPaint.configure(width = 1, cursor = "hand2")
         self.inspPaint_window = self.mainCan.create_window(1059, 38, window = self.inspPaint)
@@ -262,7 +263,7 @@ class GUI(Frame):
         functions.thinClients.append(self.inspPaint)
 
         #Glass repair line
-        self.glassRepair = Button(master, text="GR", command = lambda: functions.pcButton(self, 'VM-GL-TB-NEW'))
+        self.glassRepair = Button(master, text="GR", command = lambda: functions.pcButtonThread(self, 'VM-GL-TB-NEW'))
         self.glassRepair.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.glassRepair.configure(width = 1, cursor = "hand2")
         self.glassRepair_window = self.mainCan.create_window(532, 390, window = self.glassRepair)
@@ -270,7 +271,7 @@ class GUI(Frame):
         functions.thinClients.append(self.glassRepair)
 
         #Glass Main line
-        self.glassMain = Button(master, text="GM", command = lambda: functions.pcButton(self, 'VM-GL-TB-OLD'))
+        self.glassMain = Button(master, text="GM", command = lambda: functions.pcButtonThread(self, 'VM-GL-TB-OLD'))
         self.glassMain.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.glassMain.configure(width = 1, cursor = "hand2")
         self.glassMain_window = self.mainCan.create_window(685, 425, window = self.glassMain)
@@ -278,7 +279,7 @@ class GUI(Frame):
         functions.thinClients.append(self.glassMain)
 
         #Loading 1
-        self.loading1 = Button(master, text="L1", command = lambda: functions.pcButton(self, 'PKB-LOADING-1'))
+        self.loading1 = Button(master, text="L1", command = lambda: functions.pcButtonThread(self, 'PKB-LOADING-1'))
         self.loading1.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.loading1.configure(width = 1, cursor = "hand2")
         self.loading1_window = self.mainCan.create_window(594, 765, window = self.loading1)
@@ -286,7 +287,7 @@ class GUI(Frame):
         functions.thinClients.append(self.loading1)
 
         #Loading 2
-        self.loading2 = Button(master, text="L2", command = lambda: functions.pcButton(self, 'PKB-LOADING-2'))
+        self.loading2 = Button(master, text="L2", command = lambda: functions.pcButtonThread(self, 'PKB-LOADING-2'))
         self.loading2.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.loading2.configure(width = 1, cursor = "hand2")
         self.loading2_window = self.mainCan.create_window(558, 765, window = self.loading2)
@@ -294,7 +295,7 @@ class GUI(Frame):
         functions.thinClients.append(self.loading2)
 
         #Loading 3
-        self.loading3 = Button(master, text="L3", command = lambda: functions.pcButton(self, 'PKB-LOADING-3'))
+        self.loading3 = Button(master, text="L3", command = lambda: functions.pcButtonThread(self, 'PKB-LOADING-3'))
         self.loading3.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.loading3.configure(width = 1, cursor = "hand2")
         self.loading3_window = self.mainCan.create_window(522, 765, window = self.loading3)
@@ -302,7 +303,7 @@ class GUI(Frame):
         functions.thinClients.append(self.loading3)
 
         #Loading 4
-        self.loading4 = Button(master, text="L4", command = lambda: functions.pcButton(self, 'PKB-LOADING-4'))
+        self.loading4 = Button(master, text="L4", command = lambda: functions.pcButtonThread(self, 'PKB-LOADING-4'))
         self.loading4.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.loading4.configure(width = 1, cursor = "hand2")
         self.loading4_window = self.mainCan.create_window(487, 765, window = self.loading4)
@@ -310,7 +311,7 @@ class GUI(Frame):
         functions.thinClients.append(self.loading4)
 
         #Loading 5
-        self.loading5 = Button(master, text="L5", command = lambda: functions.pcButton(self, 'PKB-LOADING-5'))
+        self.loading5 = Button(master, text="L5", command = lambda: functions.pcButtonThread(self, 'PKB-LOADING-5'))
         self.loading5.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.loading5.configure(width = 1, cursor = "hand2")
         self.loading5_window = self.mainCan.create_window(453, 765, window = self.loading5)
@@ -318,7 +319,7 @@ class GUI(Frame):
         functions.thinClients.append(self.loading5)
 
         #Loading 6
-        self.loading6 = Button(master, text="L6", command = lambda: functions.pcButton(self, 'PKB-LOADING6'))
+        self.loading6 = Button(master, text="L6", command = lambda: functions.pcButtonThread(self, 'PKB-LOADING6'))
         self.loading6.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.loading6.configure(width = 1, cursor = "hand2")
         self.loading6_window = self.mainCan.create_window(1106, 685, window = self.loading6)
@@ -326,7 +327,7 @@ class GUI(Frame):
         functions.thinClients.append(self.loading6)
 
         #Loading 7
-        self.loading7 = Button(master, text="L7", command = lambda: functions.pcButton(self, 'PKB-LOADING7'))
+        self.loading7 = Button(master, text="L7", command = lambda: functions.pcButtonThread(self, 'PKB-LOADING7'))
         self.loading7.grid(padx = 0, pady = 0, sticky = W+E+N+S)
         self.loading7.configure(width = 1, cursor = "hand2")
         self.loading7_window = self.mainCan.create_window(1106, 748, window = self.loading7)
@@ -371,6 +372,7 @@ class GUI(Frame):
         self.addLogin.addPassEntry.grid(row = 1, column = 1)
 
         #Add user button
+        #Unnecessary to have thread here. Window is a part of main UI. Also, tkMessageBox makes the most sense for alerting if the user was added
         self.addLogin.addLoginButton = Button(self.addLogin, text="Add User", command = lambda: functions.addUser(self, master))
         self.addLogin.addLoginButton.grid(row = 2, column = 0, columnspan = 2)
 
@@ -428,8 +430,44 @@ class GUI(Frame):
         self.addLogin.protocol("WM_DELETE_WINDOW", lambda: functions.on_closing(self, master))
         master.protocol("WM_DELETE_WINDOW", lambda: functions.on_closing(self, master))
 
+class checkAliveThread(object):
+    
+    def __init__(self):
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True
+        thread.start()
+
+    def run(self):
+        """ Method that runs forever """
+        while True:
+            i = 0
+            while (i < len(functions.thinClients)):
+                functions.thinClients[i].configure(bg = functions.btnColorCont(functions.thinClients[i].hostName))
+                time.sleep(.5)
+                i += 1
+
+
 #main loop
 if __name__ == "__main__":
-    
-    guiFrame = GUI()
-    guiFrame.mainloop()
+
+    #Main GUI setup
+    def mainGUI():
+        guiFrame = GUI()
+        guiFrame.mainloop()
+
+    #Checks host alive in the background
+    def checkAlive():
+        n = 1
+        while (n == 1):
+            i = 0
+            while (i < len(functions.thinClients)):
+                functions.thinClients[i].configure(bg = functions.btnColorCont(functions.thinClients[i].hostName))
+                time.sleep(.5)
+                i += 1
+
+    #Set up threading
+    t1 = threading.Thread(target = mainGUI)
+
+    #Starts thread
+    t1.start()
+    t2 = checkAliveThread()

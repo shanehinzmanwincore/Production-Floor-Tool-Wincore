@@ -9,6 +9,7 @@ import subprocess
 import tkMessageBox
 import hashlib
 import time
+import threading
 
 #Brings in logger
 logger = logger.setup_logger('root')
@@ -46,6 +47,62 @@ options = [
     
 thinClients = []
 
+"""
+Threadding
+ - This section of code takes all of the beginning functions and creates threads for them to br ran in
+ - Doing so keeps the main program from freezing. It also is much faster than having all the functions ran in the same thread
+"""
+#Makes any function a thread
+class startThread(threading.Thread):
+    def __init__(self, target, *args):
+        self._target = target
+        self._args = args
+        threading.Thread.__init__(self)
+
+    def run(self):
+        self._target(*self._args)
+
+#Turning cuntions into threads
+def clearButtonClickThread(self):
+    t = startThread(clearButtonClick, self,)
+    t.start()
+
+def restButtonClickThread(self):
+    t = startThread(restButtonClick, self,)
+    t.start()
+
+def tigerKillButtonClickThread(self):
+    t = startThread(tigerKillButtonClick, self,)
+    t.start()
+
+def trackingKillButtonClickThread(self):
+    t = startThread(trackingKillButtonClick, self,)
+    t.start()
+
+def glassInspKillButtonClickThread(self):
+    t = startThread(glassInspKillButtonClick, self,)
+    t.start()
+
+def truckingKillButtonClickThread(self):
+    t = startThread(truckingKillButtonClick, self,)
+    t.start()
+
+def pcButtonThread(self, n):
+    t = startThread(pcButton, self, n,)
+    t.start()
+
+def removeBatchThread(self, options):
+    t = startThread(removeBatch, self, options,)
+    t.start()
+    
+def PCRefThread(self, thinClients):
+    t = startThread(PCRef, self, thinClients,)
+    t.start()
+
+"""
+End Threadding
+"""
+ 
 #Clear text in entry field
 def clearButtonClick(self):
     logger.info('Cleared field')
@@ -121,7 +178,10 @@ def tigerKillButtonClick(self):
                 logger.info('Kill TigerStop command was unsuccessful')
                 message = "Kill TigerStop command was unsuccessful on " + pcName
                 outputMessage(self, message)
-                tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+                #There is a known issue when running threads and a tkmessagebox. Since I have moved to threads, I have to display this in the output and not a messagebox. :(
+                #tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+                message = "There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine"
+                outputMessage(self, message)
     else:
         #Entry host found send command
         result = killProc(pcName, "FtTigerStop.exe")
@@ -133,8 +193,12 @@ def tigerKillButtonClick(self):
             logger.info('Kill TigerStop command was unsuccessful')
             message = "Kill TigerStop command was unsuccessful on " + pcName
             outputMessage(self, message)
-            tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+            #There is a known issue when running threads and a tkmessagebox. Since I have moved to threads, I have to display this in the output and not a messagebox. :(
+            #tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+            message = "There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine"
+            outputMessage(self, message)
 
+#Kills Tracking process on desired machine
 def trackingKillButtonClick(self):
     
     logger.info('User trying to kill Tracking process')
@@ -168,7 +232,10 @@ def trackingKillButtonClick(self):
                 logger.info('Kill Tracking command was unsuccessful')
                 message = "Kill Tracking command was unsuccessful on " + pcName
                 outputMessage(self, message)
-                tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+                #There is a known issue when running threads and a tkmessagebox. Since I have moved to threads, I have to display this in the output and not a messagebox. :(
+                #tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+                message = "There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine"
+                outputMessage(self, message)
     else:
         #Entry host found send command
         result = killProc(pcName, "FtTracking.exe")
@@ -180,8 +247,12 @@ def trackingKillButtonClick(self):
             logger.info('Kill Tracking command was unsuccessful')
             message = "Kill Tracking command was unsuccessful on " + pcName
             outputMessage(self, message)
-            tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+            #There is a known issue when running threads and a tkmessagebox. Since I have moved to threads, I have to display this in the output and not a messagebox. :(
+            #tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+            message = "There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine"
+            outputMessage(self, message)
 
+#Kills Glass process on desired machine
 def glassInspKillButtonClick(self):
     
     logger.info('User trying to kill glass line inspection process')
@@ -215,7 +286,10 @@ def glassInspKillButtonClick(self):
                 logger.info('Kill glass line inspection command was unsuccessful')
                 message = "Kill glass line inspection command was unsuccessful on " + pcName
                 outputMessage(self, message)
-                tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+                #There is a known issue when running threads and a tkmessagebox. Since I have moved to threads, I have to display this in the output and not a messagebox. :(
+                #tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+                message = "There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine"
+                outputMessage(self, message)
     else:
         #Entry host found send command
         result = killProc(pcName, "LnInspection.exe")
@@ -227,8 +301,12 @@ def glassInspKillButtonClick(self):
             logger.info('Kill glass line inspection command was unsuccessful')
             message = "Kill glass line inspection command was unsuccessful on " + pcName
             outputMessage(self, message)
-            tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+            #There is a known issue when running threads and a tkmessagebox. Since I have moved to threads, I have to display this in the output and not a messagebox. :(
+            #tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+            message = "There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine"
+            outputMessage(self, message)
 
+#Kills Trucking process on desired machine
 def truckingKillButtonClick(self):
     
     logger.info('User trying to kill Trucking process')
@@ -262,7 +340,11 @@ def truckingKillButtonClick(self):
                 logger.info('Kill Trucking command was unsuccessful')
                 message = "Kill Trucking command was unsuccessful on " + pcName
                 outputMessage(self, message)
-                tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+                #There is a known issue when running threads and a tkmessagebox. Since I have moved to threads, I have to display this in the output and not a messagebox. :(
+                #tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+                message = "There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine"
+                outputMessage(self, message)
+                
     else:
         #Entry host found send command
         result = killProc(pcName, "FtTrucking.exe")
@@ -274,7 +356,10 @@ def truckingKillButtonClick(self):
             logger.info('Kill Trucking command was unsuccessful')
             message = "Kill Trucking command was unsuccessful on " + pcName
             outputMessage(self, message)
-            tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+            #There is a known issue when running threads and a tkmessagebox. Since I have moved to threads, I have to display this in the output and not a messagebox. :(
+            #tkMessageBox.showerror("Taskkill Error","There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine")
+            message = "There was an error issuing your command. This is most likely cause by: \n - The process is not running on the remote machine \n - WMI service is not running correctly on the remote machine"
+            outputMessage(self, message)
 
 #Determines if host is alive by pinging the host
 def isAlive(name):
@@ -359,6 +444,7 @@ def addUser(self, master):
 
 #Login method
 def auth(self, master):
+
     name = str(self.login.nameEntry.get())
     password = str(self.login.passEntry.get())
 
@@ -380,8 +466,6 @@ def auth(self, master):
             self.login.withdraw()
             self.addLogin.withdraw()
             logger.warning(name + ' logged in')
-            tkMessageBox.showinfo("Logging in","You have been logged in. After clicking okay, you may experience a brief pause. All PCs will be checked to see if they are alive.")
-            PCRef(self, thinClients)
             break
         else:
             valid = 0
@@ -415,8 +499,8 @@ def initUI(self):
     fileMenu.add_command(label="Add User", command = lambda: addUserButtonClick(self))
     menubar.add_cascade(label="File", menu=fileMenu)
 
-    toolsMenu.add_command(label="Refresh View", command = lambda: PCRef(self, thinClients))
-    toolsMenu.add_command(label="Remove Batch", command = lambda: removeBatch(self, options))
+    toolsMenu.add_command(label="Refresh View", command = lambda: PCRefThread(self, thinClients))
+    toolsMenu.add_command(label="Remove Batch", command = lambda: removeBatchThread(self, options))
     menubar.add_cascade(label="Tools", menu=toolsMenu)
 
     logger.info('Menu load complete')
@@ -489,8 +573,17 @@ def btnColor(self, PC):
     else:
         return 'red'
 
+#Used for background button color check
+def btnColorCont(PC):
+    if(isAlive(PC) == "1"):
+        return '#08B8FF'
+    else:
+        return 'red'
+
 #Removes all batch files on desktop of the PC's in the options list
 def removeBatch(self, options):
+    outputMessage(self, 'Removing all desktop batch file icons')
+    logger.info('Removing all desktop batch file icons')
     i=0
     while i < len(options):
         subprocess.call('WMIC /node:"' + options[i] + '" process call create "cmd.exe /c del %userprofile%\Desktop\*.bat /force"', shell = True)
