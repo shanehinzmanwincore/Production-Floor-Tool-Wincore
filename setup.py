@@ -7,7 +7,7 @@ from cx_Freeze import setup, Executable
 
 # Dependencies are automatically detected, but it might need fine tuning.
 build_exe_options = {
-    "packages": ["Tkinter", "PIL", "functions"],
+    "packages": ["Tkinter", "PIL", "functions", "threading", "time"],
     "include_files": ['floor.PNG']
     }
 
